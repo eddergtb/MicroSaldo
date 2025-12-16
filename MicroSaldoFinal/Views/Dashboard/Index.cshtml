@@ -1,0 +1,23 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="dashboard">
+    <aside class="sidebar">
+        <div class="user-info text-center">
+            <img src="~/images/user.png" class="user-photo" alt="Usuario" />
+            <div class="user-name">@Context.Session.GetString("UserName")</div>
+        </div>
+        <ul class="menu">
+            <li>INICIO</li>
+            <li>PRODUCTOS</li>
+            <li>EGRESOS</li>
+            <li>INGRESOS</li>
+            <li>REPORTES</li>
+        </ul>
+    </aside>
+    <section class="content">
+        <h2>Dashboard</h2>
+        <p>Bienvenido, @Context.Session.GetString("UserName")</p>
+    </section>
+</div>

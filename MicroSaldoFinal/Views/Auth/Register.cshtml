@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "Registro";
+}
+
+<div class="row mt-4">
+    <div class="col-md-6 offset-md-3">
+        <h3>Crear cuenta</h3>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <form asp-action="Register" method="post">
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input name="nombre" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input name="email" type="email" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input name="password" type="password" class="form-control" required />
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Confirmar Password</label>
+                <input name="confirmarPassword" type="password" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+        </form>
+    </div>
+</div>
