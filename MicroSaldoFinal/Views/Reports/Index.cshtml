@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "_LayoutWithSidebar";
+
+    ViewData["Title"] = "Reportes";
+
+    ViewData["ActivePage"] = "Inicio";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>MicroSaldo - Registro de Reportes</title>
+    <link rel="stylesheet" href="~/css/reports.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>MicroSaldo</h1>
+
+        <div class="card">
+            <h2>Registro de Reportes</h2>
+
+            <div class="form-row filter-row">
+                <input type="date" value="2023-07-08">
+            </div>
+
+            <div class="table reports-table">
+
+                <div class="header report-header">
+                    <span>Total Egresos</span>
+                    <span>Total Ingresos</span>
+                    <span>Fecha</span>
+                    <span></span>
+                </div>
+
+                <div class="row report-row">
+                    <span>$100.000</span>
+                    <span>$80.000</span>
+                    <span class="center">08/07/2023</span>
+                    <span class="action">
+                        <button class="btn edit">Editar</button>
+                        <button class="btn delete">Eliminar</button>
+                    </span>
+                </div>
+
+                <div class="row empty report-row">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="row empty report-row">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="row empty report-row">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="row empty report-row">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="row empty report-row">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="row empty report-row">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

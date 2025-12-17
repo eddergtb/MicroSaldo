@@ -1,0 +1,241 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+.layout-body {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: var(--color-bg);
+}
+
+.main-content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: calc(100% - 15rem);
+    padding-top: 0;
+    margin-left: 15rem;
+    min-height: 100vh;
+    transition: margin-left 0.5s ease, width 0.5s ease;
+}
+
+.sidebar.minimize ~ .main-content-wrapper {
+    margin-left: 4.94rem;
+    width: calc(100% - 4.94rem);
+}
+
+.sidebar {
+    position: fixed;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto";
+}
+
+:root {
+    --color-bg: #EBECF2;
+    --color-hover: rgb(39, 39, 39, 39);
+    --color-surface: #FFFFFF;
+    --color-border: #9A9EB2;
+    --color-text-primary: #000;
+    --color-text-secondary: #3F435D;
+    --color-tooltip-bg: #2A2E33;
+    --color-tooltip-text: #fff;
+    --shadow-border: rgba(0, 0, 0, 0.1);
+    --user-bg-color: #FAFAFC;
+}
+
+/*-- Sidebard --*/
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 15rem;
+    height: 100%;
+    padding: 1.4rem 1rem 0 1rem;
+    background-color: var(--color-surface);
+    box-shadow: 1px 0px 10px var(--shadow-border);
+    transition: width 0.5s ease;
+}
+
+.sidebar.minimize {
+    width: 4.94rem;
+}
+
+.sidebar.minimize .menu_btn {
+    right: -2.2rem;
+}
+
+.sidebar.minimize .menu_btn i {
+    transform: rotate(180deg);
+}
+
+/*-- Header --*/
+.header {
+    width: 100%;
+}
+
+/*-- Menu Button --*/
+.menu_btn {
+    position: absolute;
+    top: 3.5%;
+    padding: 0;
+    right: -0.87rem;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color:#fff;
+    color:#757575;
+    box-shadow: 2px 2px 5px var(--shadow-border);
+    transition: 0.3s ease;
+}
+.menu_btn i {
+    font-size: 1.5rem;
+}
+
+/*-- Brand --*/
+.brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding-left: 0.455rem;
+    padding-bottom: 1.8rem;
+    overflow: hidden;
+}
+
+/*-- Menu container --*/
+.menu_container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.brand img {
+    width: 2rem;
+}
+
+.brand span {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+/*-- Menu --*/
+.menu {
+    width: 100%;
+    display: flex;
+    padding: 0;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+    .menu .menu_item {
+        position: relative;
+        list-style: none;
+        overflow: hidden;
+    }
+
+    .menu .menu_link {
+        width: 100%;
+        display: flex;
+        padding: 0.55rem 0.8rem;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        border-radius: 0.3rem;
+        align-items: center;
+    }
+
+.menu_item:hover .menu_link, .menu_item.active .menu_link {
+    color: var(--color-bg);
+    background-color: var(--color-hover);
+}
+
+.menu_link i {
+    font-size: 1.35rem;
+    padding: 0;
+    margin-right: 0.8rem;
+}
+
+    .menu_link i:last-child {
+        margin-left: auto;
+    }
+
+.menu_link span {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.sidebar.minimize .menu_item:hover {
+    overflow: visible;
+}
+
+    .sidebar.minimize .menu_item:hover span {
+        position: absolute;
+        left: 4.2rem;
+        padding: 0.5rem;
+        background-color: var(--color-tooltip-bg);
+        border-radius: 0.4rem;
+        color: var(--color-tooltip-text);
+        transition: all 0.3s ease;
+    }
+
+/*-- Footer --*/
+
+.footer {
+    width: 100%;
+    padding: 1rem 0;
+    box-shadow: 0 -0.02rem 0 0 var(--color-border);
+}
+
+.user {
+    display: flex;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.user_img {
+    display: flex;
+    margin: 0 0.7rem 0 0.35rem;
+}
+
+.user_data {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+    .user_data .name {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
+    }
+
+    .user_data .email {
+        font-size: 0,7rem;
+        color: var(--color-text-secondary);
+    }
+
+.user_img img {
+    width: 2.2rem;
+    height: 2.2rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.user_icon {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--color-text-secondary);
+}

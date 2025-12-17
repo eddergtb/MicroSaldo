@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+}
+
+.container {
+    width: 95%;
+    margin: 20px auto;
+}
+
+h1 {
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.card {
+    border: 1px solid #999;
+    padding: 25px;
+}
+
+.search-section {
+    margin-bottom: 25px;
+}
+
+.search-section label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.search-section input {
+    width: 300px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid #999;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.form-row input {
+    width: 190px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid #999;
+}
+
+.btn {
+    padding: 10px 25px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn.add {
+    background: #555;
+}
+
+.btn.delete {
+    background: #555;
+}
+
+.table {
+    width: 100%;
+}
+
+.p_header {
+    display: grid;
+    grid-template-columns: 1.5fr 1.5fr 1fr 1fr auto;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1.5fr 1.5fr 1fr 1fr auto;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.row span {
+    width: 90%;
+    border-bottom: 1px solid #999;
+    padding-bottom: 4px;
+}
+
+.row.empty span {
+    height: 18px;
+}
+
+/* Alineaciones */
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.action {
+    display: flex;
+    justify-content: flex-end;
+}

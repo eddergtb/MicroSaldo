@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 html {
   font-size: 14px;
 }
@@ -29,3 +30,89 @@ body {
 .menu { list-style: none; padding-left: 0; margin-top: 1rem; }
 .menu li { padding: .5rem 0; border-bottom: 1px solid #eee; cursor: pointer; }
 .menu li:hover { background: #e9ecef; }
+=======
+html, body {
+    min-height: 100vh;
+    height: auto;
+}
+main {
+    height: auto !important;
+}
+
+.welcome-card {
+    width: 90%;
+    max-width: 1200px;
+    min-height: 450px;
+    border-radius: 20px;
+    background: white;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.register-card-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-image {
+    max-width: 450px;
+    height: auto;
+}
+
+.text-content {
+    text-align: left;
+}
+
+.card-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 3rem;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 2rem;
+}
+
+.card-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    color: black;
+}
+.card-subtitle {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+.header-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.btn-dark-outline {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.register-card {
+    padding: 60px;
+}
+
+.register-card .form-control {
+    background-color: #212529;
+    color: #f5f5f5;
+    border-radius: 20px;
+    padding: 5px 14px;
+}
+
+    .register-card .form-control:focus {
+        background-color: #212529;
+        border-color: #000;
+        box-shadow: none;
+    }
+>>>>>>> 28f4fc1bee145f03fd32f4ad5ecc966ad0679ade

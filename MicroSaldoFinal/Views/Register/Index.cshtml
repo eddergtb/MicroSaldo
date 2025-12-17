@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Registro";
+}
+
+<main class="main-container">
+    <section class="register-card border border-dark rounded-0">
+
+        <h1 class="card-title justify-content-center mb-4">MicroSaldo</h1>
+        <div>
+            <h3 class="card-subtitle text-center mb-4">Registro</h3>
+        </div>
+
+        <form asp-action="Register" method="post" class="row g-2 d-flex flex-column gap-3">
+
+            <div>
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="Nombre" required />
+            </div>
+
+            <div>
+                <label class="form-label">Documento</label>
+                <input type="text" class="form-control" name="Documento" required />
+            </div>
+
+            <div>
+                <label class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" name="Email" required />
+            </div>
+
+            <div>
+                <label class="form-label">Contraseña</label>
+                <input type="password" class="form-control" name="Password" required />
+            </div>
+
+            <div>
+                <label class="form-label">Confirmar contraseña</label>
+                <input type="password" class="form-control" name="ConfirmPassword" required />
+            </div>
+
+            <button type="submit" class="btn btn-dark">Registrarse</button>
+        </form>
+
+    </section>
+</main>

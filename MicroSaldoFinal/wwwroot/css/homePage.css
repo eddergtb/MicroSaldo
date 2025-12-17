@@ -1,0 +1,114 @@
+﻿.main-content-wrapper main {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-card {
+    background-color: #ffffff;
+    padding: 40px 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0D, 0, 0.1);
+    width: 700px;
+    max-width: 90%;
+}
+
+.main-title {
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.content-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.left-section {
+    flex: 1;
+}
+
+.greeting {
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+    .greeting p {
+        margin: 5px 0;
+        font-size: 1.1em;
+    }
+
+        .greeting p:first-child {
+            font-size: 1.3em;
+        }
+
+.suggestions-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .suggestions-list li {
+        margin-bottom: 10px;
+    }
+
+    .suggestions-list a {
+        text-decoration: none;
+        color: #666;
+        font-size: 1.1em;
+        display: block;
+    }
+
+        .suggestions-list a:hover {
+            color: #333;
+        }
+
+.right-section {
+    flex: 0 0 40%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.logo-container {
+    text-align: center;
+    color: #000;
+}
+
+.logo-graph {
+    width: 150px;
+    height: 150px;
+    border: 20px solid #000;
+    border-radius: 50%;
+    border-top-color: transparent;
+    margin: 0 auto 10px;
+    position: relative;
+}
+
+    .logo-graph::before {
+        content: '';
+        font-size: 80px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-70%, -60%);
+        z-index: 1;
+    }
+
+.logo-text {
+    font-size: 1.8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.logo img {
+    width: 20rem;
+    height: auto;

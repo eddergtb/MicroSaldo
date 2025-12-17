@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿@{
     ViewData["Title"] = "Inicio";
 }
@@ -10,3 +11,30 @@
 <div class="text-center mt-5">
     <h1 class="display-5">Bienvenido a MicroSaldo</h1>
 </div>
+=======
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+<header class="main-header">
+    <nav class="d-flex justify-content-end gap-1 ms-auto">
+        <a class="btn btn-dark text-white" asp-controller="Login" asp-action="Index">Iniciar sesión</a>
+        <a class="btn btn-dark text-white" asp-controller="Register" asp-action="Index">Registrarse</a>
+    </nav>
+</header>
+
+<main class="main-container">
+    <section class="welcome-card border border-dark rounded-0">
+        <div class="row g-2">
+            <div class="col-md-7 d-flex flex-column justify-content-start p-5">
+                <h1 class="card-title">MicroSaldo</h1>
+                <p class="card-text text-muted" >¡Bienvenido a MicroSaldo! Es un placer tenerte con nosotros.</p>
+            </div>
+
+            <div class="col-md-5 d-flex justify-content-center align-items-center p-4">
+                <img src="~/images/logo.png" alt="MicroSaldo" class="img-fluid home-image" />
+            </div>
+        </div>
+    </section>
+</main>
+>>>>>>> 28f4fc1bee145f03fd32f4ad5ecc966ad0679ade
