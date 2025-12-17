@@ -1,22 +1,39 @@
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Inicio de Sesión";
+    Layout = null;
 }
 
-<div class="row mt-4">
-    <div class="col-md-4 offset-md-4">
-        <h3>Iniciar sesión</h3>
-        <hr />
-        <div asp-validation-summary="All" class="text-danger"></div>
-        <form asp-action="Login" method="post">
-            <div class="mb-3">
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MicroSaldo</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<div class="d-flex justify-content-center pt-5">
+    <section class="register-card border border-dark rounded-0">
+        <h1 class="card-title text-center mb-4">MicroSaldo</h1>
+        <h3 class="card-subtitle text-center mb-4">Inicio de sesión</h3>
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+        <form asp-action="Login" method="post" class="d-flex flex-column gap-3">
+            <div>
                 <label class="form-label">Email</label>
-                <input name="email" type="email" class="form-control" required />
+                <input type="email" class="form-control" name="email" required />
             </div>
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input name="password" type="password" class="form-control" required />
+            <div>
+                <label class="form-label">Contraseña</label>
+                <input type="password" class="form-control" name="password" required />
             </div>
-            <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+            <button type="submit" class="btn btn-dark text-white mt-3">Iniciar sesión</button>
+            <div class="text-center mt-1">
+                <a asp-controller="Auth" asp-action="Register">¿No estás registrado?</a>
+            </div>
         </form>
-    </div>
+    </section>
 </div>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

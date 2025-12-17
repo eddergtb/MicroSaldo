@@ -1,71 +1,108 @@
+﻿@model MicroSaldoFinal.Models.FinancialReportViewModel
 ﻿@{
-    Layout = "_LayoutWithSidebar";
+﻿    Layout = "_LayoutWithSidebar";
+﻿    ViewData["Title"] = "Reporte Financiero";
+﻿}
+﻿
+﻿<link rel="stylesheet" href="~/css/reports.css">
+﻿
+﻿<div class="container">
+﻿    <div class="report-header">
+﻿        <h1>Reporte Financiero</h1>
+﻿        <p class="text-muted">Análisis de ingresos y egresos por período.</p>
+﻿    </div>
+﻿
+﻿    <div class="card filter-card">
+﻿        <form method="get" asp-action="Index" asp-controller="Reports">
+﻿            <div class="row align-items-end">
+﻿                <div class="col-md-5">
+﻿                    <label for="startDate" class="form-label">Fecha de Inicio</label>
+﻿                    <input type="date" id="startDate" name="startDate" class="form-control" value="@Model.StartDate?.ToString("yyyy-MM-dd")">
+﻿                </div>
+﻿                <div class="col-md-5">
+﻿                    <label for="endDate" class="form-label">Fecha de Fin</label>
+﻿                    <input type="date" id="endDate" name="endDate" class="form-control" value="@Model.EndDate?.ToString("yyyy-MM-dd")">
+﻿                </div>
+﻿                <div class="col-md-2 d-grid">
+﻿                    <button type="submit" class="btn btn-primary">Generar Reporte</button>
+﻿                </div>
+﻿            </div>
+﻿        </form>
+﻿    </div>
+﻿
+<div class="card data-card mt-4">
+    <h2 class="mb-3">Resumen del Período</h2>
 
-    ViewData["Title"] = "Reportes";
-
-    ViewData["ActivePage"] = "Inicio";
-}
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>MicroSaldo - Registro de Reportes</title>
-    <link rel="stylesheet" href="~/css/reports.css">
-</head>
-<body>
-
-    <div class="container">
-        <h1>MicroSaldo</h1>
-
-        <div class="card">
-            <h2>Registro de Reportes</h2>
-
-            <div class="form-row filter-row">
-                <input type="date" value="2023-07-08">
-            </div>
-
-            <div class="table reports-table">
-
-                <div class="header report-header">
-                    <span>Total Egresos</span>
-                    <span>Total Ingresos</span>
-                    <span>Fecha</span>
-                    <span></span>
-                </div>
-
-                <div class="row report-row">
-                    <span>$100.000</span>
-                    <span>$80.000</span>
-                    <span class="center">08/07/2023</span>
-                    <span class="action">
-                        <button class="btn edit">Editar</button>
-                        <button class="btn delete">Eliminar</button>
-                    </span>
-                </div>
-
-                <div class="row empty report-row">
-                    <span></span><span></span><span></span><span></span>
-                </div>
-                <div class="row empty report-row">
-                    <span></span><span></span><span></span><span></span>
-                </div>
-                <div class="row empty report-row">
-                    <span></span><span></span><span></span><span></span>
-                </div>
-                <div class="row empty report-row">
-                    <span></span><span></span><span></span><span></span>
-                </div>
-                <div class="row empty report-row">
-                    <span></span><span></span><span></span><span></span>
-                </div>
-                <div class="row empty report-row">
-                    <span></span><span></span><span></span><span></span>
-                </div>
-
-            </div>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Total Ingresos</th>
+                        <th>Total Egresos</th>
+                        <th>Saldo del Período</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-success fw-bold">
+                            @Model.TotalIngresosPeriodo.ToString("C")
+                        </td>
+                        <td class="text-danger fw-bold">
+                            @Model.TotalEgresosPeriodo.ToString("C")
+                        </td>
+                        <td class="fw-bold @(Model.SaldoPeriodo >= 0 ? "text-success" : "text-danger")">
+                            @Model.SaldoPeriodo.ToString("C")
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
-</body>
-</html>
+﻿
+﻿    <div class="card data-card mt-4">
+﻿        <h2 class="mb-3">Desglose Diario</h2>
+﻿        <div class="table-responsive">
+﻿            <table class="table reports-table">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="text-center">Fecha</th>
+                            <th class="text-end">Total Ingresos</th>
+                            <th class="text-end">Total Egresos</th>
+                            <th class="text-end">Resultado Diario</th>
+                        </tr>
+                    </thead>
+﻿                <tbody>
+﻿                @if (!Model.DailyReports.Any())
+﻿                {
+﻿                    <tr>
+﻿                        <td colspan="4" class="p-3 text-muted text-center">No hay datos para el período seleccionado.</td>
+﻿                    </tr>
+﻿                }
+﻿                else
+﻿                {
+﻿                    @foreach (var report in Model.DailyReports)
+﻿                    {
+                        <tr>
+                            <td class="text-center fw-bold">
+                                @report.Fecha.ToString("dd/MM/yyyy")
+                            </td>
+                            <td class="text-end text-success">
+                                @report.TotalIngresos.ToString("C")
+                            </td>
+                            <td class="text-end text-danger">
+                                @report.TotalEgresos.ToString("C")
+                            </td>
+                            <td class="text-end fw-bold @(report.Resultado >= 0 ? "text-success" : "text-danger")">
+                                @report.Resultado.ToString("C")
+                            </td>
+                        </tr>
+
+﻿                    }
+﻿                }
+﻿                </tbody>
+﻿            </table>
+﻿        </div>
+﻿    </div>
+﻿</div>
+﻿

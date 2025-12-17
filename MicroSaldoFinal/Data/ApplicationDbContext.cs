@@ -10,7 +10,8 @@ namespace MicroSaldoFinal.Data
 
         public DbSet<Usuario> Usuarios => Set<Usuario>();
         public DbSet<Producto> Productos => Set<Producto>();
-        public DbSet<Movimiento> Movimientos => Set<Movimiento>();
+        public DbSet<Ingreso> Ingresos => Set<Ingreso>();
+        public DbSet<Egreso> Egresos => Set<Egreso>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,10 +20,6 @@ namespace MicroSaldoFinal.Data
             modelBuilder.Entity<Usuario>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
-
-            modelBuilder.Entity<Movimiento>()
-                .Property(m => m.Tipo)
-                .HasConversion<int>();
         }
     }
 }

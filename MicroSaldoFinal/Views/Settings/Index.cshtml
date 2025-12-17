@@ -1,74 +1,159 @@
-﻿@{
+﻿@model MicroSaldoFinal.Models.Usuario
+@{
     Layout = "_LayoutWithSidebar";
-
     ViewData["Title"] = "Configuración";
-
-    ViewData["ActivePage"] = "Inicio";
 }
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>MicroSaldo - Información de la Cuenta</title>
-    <link rel="stylesheet" href="~/css/settings.css">
-</head>
-<body>
+<link rel="stylesheet" href="~/css/settings.css">
 
-    <div class="container">
-        <h1>MicroSaldo</h1>
+<div class="container">
+    <h1>MicroSaldo</h1>
 
-        <div class="card profile-card">
-            <div class="card-header-block">
-                INFORMACION DE LA CUENTA
-            </div>
+    @if (ViewData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">✓ @ViewData["SuccessMessage"]</div>
+    }
 
-            <div class="profile-details">
-
-                <div class="detail-row">
-                    <span class="label">Cargo:</span>
-                    <br>
-                    <br>
-                    <span class="value">Empleado</span>
-                </div>
-
-                <div class="detail-row">
-                    <span class="label">Nombres:</span>
-                    <span class="value">Dylan Andrey</span>
-                </div>
-
-                <div class="detail-row">
-                    <span class="label">Apellidos:</span>
-                    <span class="value">Moreno Vargas</span>
-                </div>
-
-                <div class="detail-row">
-                    <span class="label">Documento:</span>
-                    <span class="value">1249234755</span>
-                </div>
-
-                <div class="detail-row">
-                    <span class="label">Teléfono:</span>
-                    <span class="value">3051315765</span>
-                </div>
-
-                <div class="detail-row">
-                    <span class="label">Correo:</span>
-                    <span class="value">Dylan@gmail.com</span>
-                </div>
-
-                <div class="detail-row">
-                    <span class="label">Contraseña:</span>
-                    <span class="value">######</span>
-                </div>
-
-            </div>
-
-            <div class="action-footer">
-                <button class="btn edit-profile">EDITAR</button>
-            </div>
+    <div class="card profile-card">
+        <div class="card-header-block">
+            INFORMACIÓN DE LA CUENTA
         </div>
-    </div>
 
-</body>
-</html>
+        <form asp-action="Index" asp-controller="Settings" method="post" enctype="multipart/form-data" id="settingsForm" onsubmit="return validateForm()">
+            <div class="profile-details">
+                <div class="row detail-row align-items-center">
+
+                <div class="row detail-row align-items-center">
+                    <div class="col-md-3"><span class="label">Cargo:</span></div>
+                    <div class="col-md-9"><span class="value" id="cargoView">Usuario</span></div>
+                </div>
+
+                <div class="row detail-row align-items-center">
+                    <div class="col-md-3"><span class="label">Nombres:</span></div>
+                    <div class="col-md-9">
+                        <span class="value" id="nombresView">@Model.Nombre</span>
+                        <input type="text" id="nombresEdit" name="Nombre" value="@Model.Nombre" class="form-control" style="display:none;" />
+                    </div>
+                </div>
+
+                <div class="row detail-row align-items-center">
+                    <div class="col-md-3"><span class="label">Apellidos:</span></div>
+                    <div class="col-md-9">
+                        <span class="value" id="apellidosView">@Model.Apellidos</span>
+                        <input type="text" id="apellidosEdit" name="Apellidos" value="@Model.Apellidos" class="form-control" style="display:none;" />
+                    </div>
+                </div>
+
+                <div class="row detail-row align-items-center">
+                    <div class="col-md-3"><span class="label">Documento:</span></div>
+                    <div class="col-md-9">
+                        <span class="value" id="documentoView">@Model.Documento</span>
+                        <input type="text" id="documentoEdit" name="Documento" value="@Model.Documento" class="form-control" style="display:none;" />
+                    </div>
+                </div>
+
+                <div class="row detail-row align-items-center">
+                    <div class="col-md-3"><span class="label">Teléfono:</span></div>
+                    <div class="col-md-9">
+                        <span class="value" id="telefonoView">@Model.Telefono</span>
+                        <input type="text" id="telefonoEdit" name="Telefono" value="@Model.Telefono" class="form-control" style="display:none;" />
+                    </div>
+                </div>
+
+                <div class="row detail-row align-items-center">
+                    <div class="col-md-3"><span class="label">Correo:</span></div>
+                    <div class="col-md-9">
+                        <span class="value" id="correoView">@Model.Email</span>
+                        <input type="email" id="correoEdit" name="Email" value="@Model.Email" class="form-control" style="display:none;" />
+                    </div>
+                </div>
+
+                <div class="row detail-row align-items-center">
+                    <div class="col-md-3"><span class="label">Contraseña:</span></div>
+                    <div class="col-md-9">
+                        <span class="value" id="contraseñaView">######</span>
+                        <div id="contraseñaEdit" style="display:none;">
+                            <input type="password" id="passwordNew" name="NewPassword" placeholder="Nueva contraseña" class="form-control mb-2" />
+                            <input type="password" id="passwordConfirm" name="ConfirmPassword" placeholder="Confirmar contraseña" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="action-footer" id="viewFooter">
+                <button type="button" class="btn edit-profile" onclick="enableEditMode()">EDITAR</button>
+            </div>
+
+            <div class="action-footer" id="editFooter" style="display:none;">
+                <button type="submit" class="btn edit-profile">GUARDAR</button>
+                <button type="button" class="btn edit-profile" onclick="cancelEditMode()" style="background:#888; margin-left:10px;">CANCELAR</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function validateForm() {
+    const fileInput = document.getElementById('photoUpload');
+    if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const maxSize = 5 * 1024 * 1024; // 5 MB
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        
+        if (file.size > maxSize) {
+            alert('El archivo no debe exceder 5 MB.');
+            return false;
+        }
+        if (!allowedTypes.includes(file.type)) {
+            alert('Solo se permiten archivos de imagen (.jpg, .jpeg, .png, .gif).');
+            return false;
+        }
+    }
+    return true;
+}
+
+function previewPhoto() {
+    const fileInput = document.getElementById('photoUpload');
+    const preview = document.getElementById('photoPreview');
+    
+    if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+    }
+}
+
+function enableEditMode() {
+    document.querySelectorAll('.value').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.form-control').forEach(el => el.style.display = 'block');
+
+    // Special handling for password
+    document.getElementById('contraseñaView').style.display = 'none';
+    document.getElementById('contraseñaEdit').style.display = 'block';
+
+    document.getElementById('viewFooter').style.display = 'none';
+    document.getElementById('editFooter').style.display = 'block';
+}
+
+function cancelEditMode() {
+    // Reset form to original values
+    document.getElementById('settingsForm').reset();
+    previewPhoto(); // Re-preview original photo if a new one was selected but not saved
+
+    document.querySelectorAll('.value').forEach(el => el.style.display = 'block');
+    document.querySelectorAll('.form-control').forEach(el => el.style.display = 'none');
+
+    // Special handling for password
+    document.getElementById('contraseñaView').style.display = 'block';
+    document.getElementById('contraseñaEdit').style.display = 'none';
+
+    document.getElementById('passwordNew').value = '';
+    document.getElementById('passwordConfirm').value = '';
+
+    document.getElementById('viewFooter').style.display = 'block';
+    document.getElementById('editFooter').style.display = 'none';
+}
+</script>

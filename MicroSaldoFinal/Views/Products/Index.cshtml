@@ -1,72 +1,125 @@
-﻿@{
+﻿@model IEnumerable<MicroSaldoFinal.Models.Producto>
+@{
     Layout = "_LayoutWithSidebar";
-
     ViewData["Title"] = "Productos";
-
-    ViewData["ActivePage"] = "Inicio";
 }
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>MicroSaldo</title>
-    <link rel="stylesheet" href="~/css/products.css">
-</head>
-<body>
+<link rel="stylesheet" href="~/css/products.css">
 
-    <div class="container">
-        <h1>MicroSaldo</h1>
+<div class="container">
+    <h1>MicroSaldo</h1>
 
-        <div class="card">
+    <div class="card">
+        <div class="search-section">
+            <label>Producto</label>
+            <form method="get" asp-action="Index" asp-controller="Products" style="display:inline-block; margin-left:10px;">
+                <input type="text" name="q" value="@Context.Request.Query["q"]" placeholder="Buscar por nombre" />
+                <button class="btn" type="submit" style="margin-left:6px;">Buscar</button>
+            </form>
+        </div>
 
-            <div class="search-section">
-                <label>Producto</label>
-                <input type="text" placeholder="Buscar por nombre">
+        <div class="form-row">
+            <form method="post" asp-action="Create" asp-controller="Products" class="d-flex gap-2 align-items-center">
+                @Html.AntiForgeryToken()
+                <input type="text" name="nombre" placeholder="Nombre del producto" required />
+                <input type="text" name="descripcion" placeholder="Descripcion" />
+                <input type="number" name="cantidad" placeholder="Cantidad" value="0" min="0" />
+                <input type="number" step="0.01" name="precio" placeholder="Precio" />
+                <button class="btn add" type="submit">Agregar</button>
+            </form>
+        </div>
+
+        <div class="table">
+            <div class="p_header">
+                <span>Producto</span>
+                <span>Descripción</span>
+                <span class="center">Cantidad</span>
+                <span class="right">Precio Venta</span>
+                <span class="center">Acciones</span>
             </div>
 
-            <div class="form-row">
-                <input type="text" placeholder="Nombre del producto">
-                <input type="text" placeholder="Descripcion">
-                <input type="number" placeholder="Cantidad">
-                <input type="text" placeholder="Precio">
-                <button class="btn add">Agregar</button>
-            </div>
-
-            <div class="table">
-
-                <div class="p_header">
-                    <span>Producto</span>
-                    <span>Descripcion</span>
-                    <span>Cantidad</span>
-                    <span>Precio</span>
-                    <span></span>
+            @if (!Model.Any())
+            {
+                <div class="row-view">
+                    <span colspan="5" class="text-center text-muted p-3">No hay productos para mostrar.</span>
                 </div>
+            }
 
-                <div class="row">
-                    <span>Teclado</span>
-                    <span>Grande</span>
-                    <span class="center">1</span>
-                    <span class="right">$50.000</span>
-                    <span class="action">
-                        <button class="btn delete">Eliminar</button>
-                    </span>
-                </div>
+            @foreach (var p in Model)
+            {
+                <div class="product-row" data-product-id="@p.Id">
+                    <!-- View Mode -->
+                    <div class="row-view">
+                        <span>@p.Nombre</span>
+                        <span>@(string.IsNullOrWhiteSpace(p.Descripcion) ? "-" : p.Descripcion)</span>
+                        <span class="center">@p.Stock</span>
+                        <span class="right">@p.Precio.ToString("C")</span>
+                        <span class="action">
+                            @if (p.Precio == 0)
+                            {
+                                <button class="btn btn-sm btn-primary edit-btn">Agregar Precio</button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-sm btn-secondary edit-btn">Editar</button>
+                            }
+                            <form method="post" asp-action="Sell" asp-controller="Products" class="sell-form d-inline-block">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@p.Id" />
+                                <input type="hidden" name="quantity" value="1" />
+                                <button class="btn btn-sm btn-success" type="submit">Vendido</button>
+                            </form>
+                            
+                            <form method="post" asp-action="Delete" asp-controller="Products" class="d-inline-block" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este producto?');">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@p.Id" />
+                                <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
+                            </form>
+                        </span>
+                    </div>
 
-                <div class="row empty">
-                    <span></span><span></span><span></span><span></span><span></span>
+                    <!-- Edit Mode (Hidden by default) -->
+                    <div class="row-edit" style="display: none;">
+                        <form method="post" asp-action="Update" asp-controller="Products">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@p.Id" />
+                            <input type="text" name="nombre" value="@p.Nombre" required />
+                            <input type="text" name="descripcion" value="@p.Descripcion" />
+                            <input type="number" name="stock" value="@p.Stock" min="0" required class="center" />
+                            <input type="number" step="0.01" name="precio" value="@p.Precio" min="0" required class="right" />
+                            <span class="action">
+                                <button class="btn btn-sm btn-primary" type="submit">Guardar</button>
+                                <button class="btn btn-sm btn-light cancel-btn" type="button">Cancelar</button>
+                            </span>
+                        </form>
+                    </div>
                 </div>
-                <div class="row empty">
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="row empty">
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-
-            </div>
-
+            }
         </div>
     </div>
+</div>
 
-</body>
-</html>
+@section Scripts {
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const productRows = document.querySelectorAll('.product-row');
+
+        productRows.forEach(row => {
+            const editBtn = row.querySelector('.edit-btn');
+            const cancelBtn = row.querySelector('.cancel-btn');
+            const viewMode = row.querySelector('.row-view');
+            const editMode = row.querySelector('.row-edit');
+
+            editBtn.addEventListener('click', () => {
+                viewMode.style.display = 'none';
+                editMode.style.display = 'grid'; // o 'block' dependiendo del CSS
+            });
+
+            cancelBtn.addEventListener('click', () => {
+                editMode.style.display = 'none';
+                viewMode.style.display = 'grid'; // o 'block'
+            });
+        });
+    });
+    </script>
+}

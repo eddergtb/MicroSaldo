@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+/* Base responsive font sizing */
 html {
   font-size: 14px;
 }
@@ -9,13 +9,18 @@ html {
   }
 }
 
+/* Layout and focus styles */
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+html, body {
+    min-height: 100vh;
+    height: auto;
+}
+
+main {
+    height: auto !important;
 }
 
 body {
@@ -30,15 +35,8 @@ body {
 .menu { list-style: none; padding-left: 0; margin-top: 1rem; }
 .menu li { padding: .5rem 0; border-bottom: 1px solid #eee; cursor: pointer; }
 .menu li:hover { background: #e9ecef; }
-=======
-html, body {
-    min-height: 100vh;
-    height: auto;
-}
-main {
-    height: auto !important;
-}
 
+/* Home / welcome styles */
 .welcome-card {
     width: 90%;
     max-width: 1200px;
@@ -110,9 +108,8 @@ main {
     padding: 5px 14px;
 }
 
-    .register-card .form-control:focus {
-        background-color: #212529;
-        border-color: #000;
-        box-shadow: none;
-    }
->>>>>>> 28f4fc1bee145f03fd32f4ad5ecc966ad0679ade
+.register-card .form-control:focus {
+    background-color: #212529;
+    border-color: #000;
+    box-shadow: none;
+}

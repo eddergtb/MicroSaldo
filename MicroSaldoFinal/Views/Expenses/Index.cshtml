@@ -1,72 +1,120 @@
-﻿@{
+﻿@model IEnumerable<MicroSaldoFinal.Models.Egreso>
+@{
     Layout = "_LayoutWithSidebar";
-
     ViewData["Title"] = "Egresos";
-
-    ViewData["ActivePage"] = "Inicio";
 }
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>MicroSaldo - Registro de Egresos</title>
-    <link rel="stylesheet" href="~/css/expenses.css">
-</head>
-<body>
+<link rel="stylesheet" href="~/css/expenses.css">
 
-    <div class="container">
-        <h1>MicroSaldo</h1>
+<div class="container">
+    <h1>MicroSaldo</h1>
 
-        <div class="card">
-            <h2>Registro de Egresos</h2>
-
-            <div class="form-row">
-                <input type="text" placeholder="Monto">
-                <input type="text" placeholder="Motivo de Pago">
-                <input type="text" placeholder="Responsable">
-
-                <input type="date">
-
-                <button class="btn add">Agregar</button>
-            </div>
-
-            <div class="table">
-
-                <div class="e_header">
-                    <span>Monto</span>
-                    <span>Motivo</span>
-                    <span>Responsable</span>
-                    <span>Fecha</span>
-                    <span></span>
-                </div>
-
-                <div class="row">
-                    <span>$100.000</span>
-                    <span>Servicios</span>
-                    <span>Dylan Moreno</span>
-                    <span class="center">12/09/2022</span>
-                    <span class="action">
-                        <button class="btn delete">Eliminar</button>
-                    </span>
-                </div>
-
-                <div class="row empty">
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="row empty">
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="row empty">
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="row empty">
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-
-            </div>
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            ✓ @TempData["Success"]
         </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            ✗ @TempData["Error"]
+        </div>
+    }
+
+    <!-- Formulario para Compra de Productos -->
+    <div class="card mb-4">
+        <h2>Compra de Productos (para Inventario)</h2>
+        <p class="text-muted">Registra un gasto por la compra de productos. El producto se agregará a tu inventario y podrás asignarle un precio de venta en la sección de 'Productos'.</p>
+        <form method="post" asp-action="CreateFromProductPurchase" asp-controller="Expenses">
+            @Html.AntiForgeryToken()
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Nombre del Producto</label>
+                    <input type="text" name="nombre" placeholder="Ej: Camisa" required />
+                </div>
+                <div class="form-group">
+                    <label>Descripción (Opcional)</label>
+                    <input type="text" name="descripcion" placeholder="Ej: Talla M, color azul" />
+                </div>
+                <div class="form-group">
+                    <label>Cantidad Comprada</label>
+                    <input type="number" name="cantidad" value="1" min="1" required />
+                </div>
+                <div class="form-group">
+                    <label>Costo Total de la Compra</label>
+                    <input type="number" step="0.01" name="costo" placeholder="Costo total" required />
+                </div>
+            </div>
+            <div class="text-end mt-3">
+                <button class="btn btn-primary" type="submit">Registrar Compra</button>
+            </div>
+        </form>
     </div>
 
-</body>
-</html>
+    <!-- Formulario para Egresos Generales -->
+    <div class="card">
+        <h2>Egresos Generales</h2>
+        <p class="text-muted">Registra gastos que no son para inventario, como recibos, servicios, etc.</p>
+        <form method="post" asp-action="Create" asp-controller="Expenses">
+            @Html.AntiForgeryToken()
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Monto del Gasto</label>
+                    <input type="number" step="0.01" name="monto" placeholder="Monto" required />
+                </div>
+                <div class="form-group">
+                    <label>Descripción</label>
+                    <input type="text" name="descripcion" placeholder="Ej: Recibo de luz" required />
+                </div>
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <input type="date" name="fecha" required />
+                </div>
+            </div>
+            <div class="text-end mt-3">
+                <button class="btn add" type="submit">Agregar Gasto General</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Tabla de Egresos -->
+    <div class="card mt-4">
+        <h2 class="mb-3">Historial de Egresos</h2>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th class="text-end">Monto</th>
+                        <th class="text-center">Fecha</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center text-muted p-3">No hay egresos registrados.</td>
+                        </tr>
+                    }
+                    @foreach (var m in Model)
+                    {
+                        <tr>
+                            <td>@(string.IsNullOrWhiteSpace(m.Descripcion) ? "-" : m.Descripcion)</td>
+                            <td class="text-end">@m.Monto.ToString("C")</td>
+                            <td class="text-center">@m.Fecha.ToString("dd/MM/yyyy")</td>
+                            <td class="text-center">
+                                <form method="post" asp-action="Delete" asp-controller="Expenses" style="display:inline">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@m.Id" />
+                                    <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

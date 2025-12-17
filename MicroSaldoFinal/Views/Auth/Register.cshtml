@@ -1,30 +1,61 @@
 @{
     ViewData["Title"] = "Registro";
+    Layout = null;
 }
 
-<div class="row mt-4">
-    <div class="col-md-6 offset-md-3">
-        <h3>Crear cuenta</h3>
-        <hr />
-        <div asp-validation-summary="All" class="text-danger"></div>
-        <form asp-action="Register" method="post">
-            <div class="mb-3">
-                <label class="form-label">Nombre</label>
-                <input name="nombre" class="form-control" required />
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MicroSaldo</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<main class="main-container">
+    <section class="register-card border border-dark rounded-0">
+        <h1 class="card-title text-center mb-4">MicroSaldo</h1>
+        <div>
+            <h3 class="card-subtitle text-center mb-4">Registro</h3>
+        </div>
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+        <form asp-action="Register" method="post" class="row g-2 d-flex flex-column gap-3">
+            <div>
+                <label class="form-label">Nombres</label>
+                <input type="text" class="form-control" name="nombre" required />
             </div>
-            <div class="mb-3">
+            <div>
+                <label class="form-label">Apellidos</label>
+                <input type="text" class="form-control" name="apellidos" />
+            </div>
+            <div>
+                <label class="form-label">Documento</label>
+                <input type="text" class="form-control" name="documento" />
+            </div>
+            <div>
+                <label class="form-label">Teléfono</label>
+                <input type="text" class="form-control" name="telefono" />
+            </div>
+            <div>
                 <label class="form-label">Email</label>
-                <input name="email" type="email" class="form-control" required />
+                <input type="email" class="form-control" name="email" required />
             </div>
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input name="password" type="password" class="form-control" required />
+            <div>
+                <label class="form-label">Contraseña</label>
+                <input type="password" class="form-control" name="password" required />
             </div>
-            <div class="mb-4">
-                <label class="form-label">Confirmar Password</label>
-                <input name="confirmarPassword" type="password" class="form-control" required />
+            <div>
+                <label class="form-label">Confirmar contraseña</label>
+                <input type="password" class="form-control" name="confirmarPassword" required />
             </div>
-            <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+            <button type="submit" class="btn btn-dark text-white">Registrarse</button>
+            <div class="text-center">
+                <a asp-controller="Auth" asp-action="Login">¿Ya estás registrado?</a>
+            </div>
         </form>
-    </div>
-</div>
+    </section>
+</main>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

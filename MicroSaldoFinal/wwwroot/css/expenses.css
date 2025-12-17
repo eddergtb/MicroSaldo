@@ -1,108 +1,172 @@
-* {
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
+/* General Body and Container Styles */
 body {
-    margin: 0;
-    padding: 0;
-    background: #ffffff;
+    background-color: #f4f7f6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
 }
 
 .container {
-    width: 95%;
-    margin: 20px auto;
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
 }
 
 h1 {
     text-align: center;
-    font-size: 48px;
-    margin-bottom: 10px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Card for main content area */
+.card {
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 h2 {
-    font-size: 20px;
-    font-weight: normal;
-    margin-bottom: 30px;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #34495e;
 }
 
-
-.card {
-    border: 1px solid #999;
-    padding: 25px;
+.card p.text-muted {
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #ecf0f1;
+    padding-bottom: 15px;
 }
 
-.form-row {
-    display: flex;
+/* New Form Grid Layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
-    align-items: center;
-    margin-bottom: 35px;
 }
 
-.form-row input {
-    width: 200px;
-    padding: 10px 15px;
-    border-radius: 20px;
-    border: 1px solid #999;
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
 }
 
-input[type="date"] {
-    padding: 10px 15px;
-    border-radius: 20px;
-    border: 1px solid #999;
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"] {
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 6px;
+    border: 1px solid #bdc3c7;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+.form-group input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+
+/* General Button Styles */
 .btn {
-    padding: 10px 25px;
-    border-radius: 20px;
+    padding: 12px 25px;
+    border-radius: 6px;
     border: none;
     font-weight: bold;
     color: #fff;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
 }
 
 .btn.add {
-    background: #555;
+    background-color: #e74c3c; /* Red for general expenses */
+}
+.btn.add:hover {
+    background-color: #c0392b;
+}
+
+.btn-primary {
+    background-color: #3498db; /* Blue for product purchase */
+}
+.btn-primary:hover {
+    background-color: #2980b9;
 }
 
 .btn.delete {
-    background: #555;
+    background-color: #c0392b; /* Red */
+    padding: 5px 15px;
+    font-size: 12px;
+}
+.btn.delete:hover {
+    background-color: #a93226;
 }
 
+/* Alert Styles */
+.alert {
+    padding: 12px;
+    margin: 20px auto;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid transparent;
+}
+.alert-success { background-color: #d4edda; border-color: #c3e6cb; color: #155724; }
+.alert-danger { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
 
+
+/* Table Styles */
 .table {
     width: 100%;
+    border-collapse: collapse;
 }
 
 .e_header {
     display: grid;
-    grid-template-columns: 1fr 1.3fr 1.5fr 1fr auto;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
     font-weight: bold;
-    margin-bottom: 10px;
+    color: #34495e;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #bdc3c7;
 }
 
 .row {
     display: grid;
-    grid-template-columns: 1fr 1.3fr 1.5fr 1fr auto;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
     align-items: center;
-    margin-bottom: 22px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.row:nth-child(even) {
+    background-color: #f8f9f9;
+}
+
+.row.empty {
+    padding: 20px;
+    grid-column: 1 / -1;
 }
 
 .row span {
-    width: 90%;
-    border-bottom: 1px solid #999;
-    padding-bottom: 4px;
+    padding: 0 10px;
 }
 
-.row.empty span {
-    height: 18px;
-}
+.row .right { text-align: right; font-weight: 600; color: #c0392b; }
+.row .center { text-align: center; }
+.row .action { text-align: right; }
 
-.center {
-    text-align: center;
-}
-
-.action {
-    display: flex;
-    justify-content: flex-end;
-}
+/* Utility Classes */
+.text-end { text-align: right; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.p-3 { padding: 1rem; }
+.text-center { text-align: center; }
+.text-muted { color: #6c757d; }

@@ -11,7 +11,7 @@
     <div class="menu_container">
         <ul class="menu">
             <li class="menu_item menu_item_static">
-                <a href="/HomePage/Index" class="menu_link">
+                <a href="/Dashboard/Index" class="menu_link">
                     <i class='bxr bx-home'></i>
                     <span>Inicio</span>
                 </a>
@@ -50,18 +50,47 @@
                     <span>Configuración</span>
                 </a>
             </li>
+            <li class="menu_item menu_item_static">
+                <a href="#" class="menu_link" data-bs-toggle="modal" data-bs-target="#logoutModal" onclick="event.preventDefault();">
+                    <i class='bx bx-arrow-right-stroke-square'></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </li>
         </ul>
+        @using Microsoft.AspNetCore.Http
+        @{
+            var userName = Context.Session.GetString("UserName") ?? "Invitado";
+            var userEmail = Context.Session.GetString("UserEmail") ?? string.Empty;
+            var userPhotoRaw = Context.Session.GetString("UserPhoto") ?? string.Empty;
+            var userPhoto = Url.Content("~/images/kitty.png");
+            if (!string.IsNullOrEmpty(userPhotoRaw))
+            {
+                if (userPhotoRaw.StartsWith("~"))
+                {
+                    userPhoto = Url.Content(userPhotoRaw);
+                }
+                else if (userPhotoRaw.StartsWith("/"))
+                {
+                    userPhoto = userPhotoRaw;
+                }
+                else
+                {
+                    userPhoto = Url.Content("~/" + userPhotoRaw);
+                }
+            }
+        }
+
         <div class="user">
             <div class="user_img">
-                <img src="~/images/kitty.png" />
+                <img src="@userPhoto" alt="User photo" />
             </div>
             <div class="user_data">
-                <span class="name">Dylan Moreno</span>
-                <span class="email">dylanmorenovargas40@gmail.com</span>
+                <span class="name">@userName</span>
+                <span class="email">@userEmail</span>
             </div>
             <div class="user_icon">
-                <i class='bx bx-arrow-right-stroke-square'></i>
             </div>
         </div>
+        
     </div>
 </div>

@@ -9,6 +9,15 @@ namespace MicroSaldoFinal.Models
         [Required, StringLength(120)]
         public string Nombre { get; set; } = string.Empty;
 
+        [StringLength(120)]
+        public string Apellidos { get; set; } = string.Empty;
+
+        [StringLength(50)]
+        public string Documento { get; set; } = string.Empty;
+
+        [StringLength(20)]
+        public string Telefono { get; set; } = string.Empty;
+
         [Required, EmailAddress, StringLength(180)]
         public string Email { get; set; } = string.Empty;
 

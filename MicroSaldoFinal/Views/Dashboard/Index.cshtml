@@ -1,23 +1,45 @@
+@model MicroSaldoFinal.Models.DashboardViewModel
+
 @{
+    Layout = "_LayoutWithSidebar";
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="dashboard">
-    <aside class="sidebar">
-        <div class="user-info text-center">
-            <img src="~/images/user.png" class="user-photo" alt="Usuario" />
-            <div class="user-name">@Context.Session.GetString("UserName")</div>
+<link rel="stylesheet" href="~/css/homePage.css" />
+
+<div class="dashboard-card">
+<!--
+Se añade 'position: relative' para que la imagen con 'position: absolute' se posicione respecto a este contenedor.
+-->
+<div class="dashboard-card" style="position: relative;">
+    <header>
+        <h1 class="main-title">MicroSaldo</h1>
+    </header>
+    <div class="content-area">
+        <div class="left-section">
+            <div class="greeting">
+                <p>¡Bienvenido a MicroSaldo ,@Model.Usuario.Nombre</p>
+                <p>¿Qué haremos hoy?</p>
+            </div>
+
+            <div class="balances mt-3 mb-3">
+                <p>Actualmente tienes</p>
+                <div><strong>Ingresos:</strong> @Model.TotalIngresos.ToString("C")</div>
+                <div><strong>Egresos:</strong> @Model.TotalEgresos.ToString("C")</div>
+                <div><strong>Saldo:</strong> @Model.Saldo.ToString("C")</div>
+            </div>
+
+            <div class="suggestions">
+                <h2 class="suggestions-title">Accesos rápidos</h2>
+                <ul class="suggestions-list">
+                    <li><a asp-controller="Products" asp-action="Index">Productos</a></li>
+                    <li><a asp-controller="Expenses" asp-action="Index">Egresos</a></li>
+                    <li><a asp-controller="Incomes" asp-action="Index">Ingresos</a></li>
+                    <li><a asp-controller="Reports" asp-action="Index">Reportes</a></li>
+                    <li><a asp-controller="Settings" asp-action="Index">Configuración</a></li>
+                </ul>
+            </div>
         </div>
-        <ul class="menu">
-            <li>INICIO</li>
-            <li>PRODUCTOS</li>
-            <li>EGRESOS</li>
-            <li>INGRESOS</li>
-            <li>REPORTES</li>
-        </ul>
-    </aside>
-    <section class="content">
-        <h2>Dashboard</h2>
-        <p>Bienvenido, @Context.Session.GetString("UserName")</p>
-    </section>
+        <img src="~/images/logo.png" alt="MicroSaldo Logo" class="dashboard-image" style="position: absolute; bottom: 20px; right: 0; max-width: 60%; opacity: 1; z-index: 0;" />
+    </div>
 </div>

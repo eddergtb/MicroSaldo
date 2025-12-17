@@ -20,65 +20,65 @@ namespace MicroSaldo.Pages.Home
             public string Apellido { get; set; }
 
             [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-            [Display(Name = "Número de Documento")]
-            [DataType(DataType.Text)] // Puedes usar [RegularExpression] si tienes un formato específico
+            [Display(Name = "Nï¿½mero de Documento")]
+            [DataType(DataType.Text)] // Puedes usar [RegularExpression] si tienes un formato especï¿½fico
             public string Documento { get; set; }
 
             [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-            [Display(Name = "Teléfono")]
+            [Display(Name = "Telï¿½fono")]
             [DataType(DataType.PhoneNumber)]
             public string Telefono { get; set; }
 
             [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-            [EmailAddress(ErrorMessage = "Ingrese una dirección de correo válida.")]
-            [Display(Name = "Correo Electrónico")]
+            [EmailAddress(ErrorMessage = "Ingrese una direcciï¿½n de correo vï¿½lida.")]
+            [Display(Name = "Correo Electrï¿½nico")]
             public string Correo { get; set; }
 
             [Required(ErrorMessage = "El campo {0} es obligatorio.")]
             [StringLength(100, ErrorMessage = "La {0} debe tener al menos {2} caracteres de longitud.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Contraseña")]
+            [Display(Name = "Contraseï¿½a")]
             public string Contrasena { get; set; }
 
-            // Opcional: Para confirmar la contraseña
+            // Opcional: Para confirmar la contraseï¿½a
             [DataType(DataType.Password)]
-            [Display(Name = "Confirmar Contraseña")]
-            [Compare("Contrasena", ErrorMessage = "La contraseña y la confirmación no coinciden.")]
+            [Display(Name = "Confirmar Contraseï¿½a")]
+            [Compare("Contrasena", ErrorMessage = "La contraseï¿½a y la confirmaciï¿½n no coinciden.")]
             public string ConfirmarContrasena { get; set; }
         }
 
         // Esta propiedad es la que enlaza los datos del formulario con tu modelo.
         [BindProperty]
-        public InputModel Input { get; set; }
+        public required InputModel Input { get; set; }
 
-        // Método que se ejecuta al cargar la página por primera vez (GET request)
+        // Mï¿½todo que se ejecuta al cargar la pï¿½gina por primera vez (GET request)
         public void OnGet()
         {
-            // Aquí puedes inicializar valores si fuera necesario
+            // Aquï¿½ puedes inicializar valores si fuera necesario
         }
 
-        // Método que se ejecuta al enviar el formulario (POST request)
+        // Mï¿½todo que se ejecuta al enviar el formulario (POST request)
         public IActionResult OnPost()
         {
-            // 1. **Validación**: Verifica si las Data Annotations (Required, EmailAddress, etc.) se cumplen.
+            // 1. **Validaciï¿½n**: Verifica si las Data Annotations (Required, EmailAddress, etc.) se cumplen.
             if (!ModelState.IsValid)
             {
-                // Si la validación falla, regresa la misma página para mostrar los errores.
+                // Si la validaciï¿½n falla, regresa la misma pï¿½gina para mostrar los errores.
                 return Page();
             }
 
-            // 2. **Lógica de Registro**: Si es válido, aquí iría tu código para:
-            //    - Hashear la contraseña (¡NUNCA la guardes en texto plano!)
+            // 2. **Lï¿½gica de Registro**: Si es vï¿½lido, aquï¿½ irï¿½a tu cï¿½digo para:
+            //    - Hashear la contraseï¿½a (ï¿½NUNCA la guardes en texto plano!)
             //    - Guardar el nuevo usuario en tu base de datos (DB).
 
-            // Ejemplo de cómo acceder a los datos:
+            // Ejemplo de cï¿½mo acceder a los datos:
             // string nombreUsuario = Input.Nombre;
             // string correoUsuario = Input.Correo;
-            // string contrasenaSinHash = Input.Contrasena; // ¡Recuerda hashear!
+            // string contrasenaSinHash = Input.Contrasena; // ï¿½Recuerda hashear!
 
-            // Por ahora, solo simularemos un éxito y redirigiremos.
+            // Por ahora, solo simularemos un ï¿½xito y redirigiremos.
 
-            // 3. **Redirección**: Si el registro es exitoso, lo rediriges a la página de inicio de sesión.
+            // 3. **Redirecciï¿½n**: Si el registro es exitoso, lo rediriges a la pï¿½gina de inicio de sesiï¿½n.
             return RedirectToPage("inicio de sesion");
             // Esto redirige a /Home/inicio de sesion
         }
