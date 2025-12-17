@@ -1,3 +1,28 @@
 ﻿@{
-    ViewData["Title"] = "Recuperar Contraseña";
+    ViewData["Title"] = "Recuperar contraseña";
 }
+
+<main class="main-container">
+    <section class="register-card border border-dark rounded-0">
+
+        <h1 class="card-title justify-content-center mb-4">MicroSaldo</h1>
+        <div>
+            <h3 class="card-subtitle text-center mb-4">Recuperar contraseña</h3>
+        </div>
+
+        <form asp-action="PassRecovery" method="post" class="row g-2 d-flex flex-column gap-3">
+
+            <div>
+                <label class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" name="Correo electrónico" required />
+            </div>
+
+            <div class="resend-link">
+                <a href="#" class="text-muted small-text">Reenviar código</a>
+            </div>
+
+            <a href="/Login/ChangePassword" class="btn btn-dark">Enviar</a>
+        </form>
+
+    </section>
+</main>
