@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "_LayoutWithSidebar";
+
+    ViewData["Title"] = "Egresos";
+
+    ViewData["ActivePage"] = "Inicio";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>MicroSaldo - Registro de Egresos</title>
+    <link rel="stylesheet" href="~/css/expenses.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>MicroSaldo</h1>
+
+        <div class="card">
+            <h2>Registro de Egresos</h2>
+
+            <div class="form-row">
+                <input type="text" placeholder="Monto">
+                <input type="text" placeholder="Motivo de Pago">
+                <input type="text" placeholder="Responsable">
+
+                <input type="date">
+
+                <button class="btn add">Agregar</button>
+            </div>
+
+            <div class="table">
+
+                <div class="e_header">
+                    <span>Monto</span>
+                    <span>Motivo</span>
+                    <span>Responsable</span>
+                    <span>Fecha</span>
+                    <span></span>
+                </div>
+
+                <div class="row">
+                    <span>$100.000</span>
+                    <span>Servicios</span>
+                    <span>Dylan Moreno</span>
+                    <span class="center">12/09/2022</span>
+                    <span class="action">
+                        <button class="btn delete">Eliminar</button>
+                    </span>
+                </div>
+
+                <div class="row empty">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="row empty">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="row empty">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="row empty">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
